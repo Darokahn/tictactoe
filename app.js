@@ -7,7 +7,12 @@ function switchTo(square, type) {
     square.classList.remove("o");
     square.classList.remove("n");
     square.classList.add(type);
-    square.innerHTML = type;
+    if (type === 'x' || type === 'o') {
+        square.innerHTML = type;
+    }
+    else {
+        square.innerHTML = "";
+    }
 
 }
 
@@ -27,8 +32,6 @@ function doTurn(event) {
 
     let condition = getCondition();
 
-    console.log(condition);
-
     switchTurn();
 
     if (condition === 'x' || condition === 'o' || condition === 'tie') {
@@ -36,12 +39,15 @@ function doTurn(event) {
         Array.from(buttons).forEach(function(button) {button.disabled = true;})
         if (condition != 'tie') outputText.innerHTML = `${condition.toUpperCase()} wins!`;
         else outputText.innerHTML = 'Tie!';
+        let i = setInterval( function() {
+            reset();
+            clearInterval(i); 
+        }, 2000);
     }
 
     else outputText.innerHTML = `It's your turn, ${turnTracker.toUpperCase()}!`;
 
 }
-
 
 function compileLines() {
     let gridobj = document.getElementById("grid");
@@ -84,7 +90,6 @@ function getCondition() {
             if (Array.from(item.classList).includes('x')) x++;
             else if (Array.from(item.classList).includes('o')) o++;
         }
-        console.log(`x: ${x}, o: ${o}`);
         if (x === 3) 
             return 'x'
         else if (o === 3) 
@@ -92,10 +97,20 @@ function getCondition() {
         else if (x + o === 3) 
             fullRows ++;
     }
-    console.log(fullRows);
     if (fullRows === 8) 
         return 'tie';
     return 'continue';
+}
+
+function reset() {
+    console.log("hello");
+    let buttons = Array.from(document.getElementsByClassName('square'));
+    buttons.forEach(function(button) {
+        switchTo(button, 'n');
+        button.disabled = false;
+    })
+    outputText.innerHTML = "It's your turn, X!";
+    turnTracker = 'x';
 }
 
 var outputText = document.getElementById("output-text");

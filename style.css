@@ -30,6 +30,28 @@
 
 .square {
     font-size: 3rem;
-    background-color: black;
+    background-color: #121212;
     color: white;
+}
+
+.square:active:not(:disabled) {
+    border-style: inset;
+    border-width: 3.5px;
+}
+
+.square:hover:not(:disabled):not(:active) {
+    background-color: black;
+    border-width: 3px;
+    border-style: outset;
+}
+
+@media screen and (max-width: 400px) {
+    #grid {
+        width: 90vw;
+        height: 90vw;
+    }
+    #output-text {
+        font-size: 1em;
+        min-width: 0px;
+    }
 }
