@@ -34,7 +34,7 @@ function doTurn(event) {
     if (condition === 'x' || condition === 'o' || condition === 'tie') {
         let buttons = document.querySelectorAll('.square');
         Array.from(buttons).forEach(function(button) {button.disabled = true;})
-        if (condition != 'tie') outputText.innerHTML = `${condition} wins!`;
+        if (condition != 'tie') outputText.innerHTML = `${condition.toUpperCase()} wins!`;
         else outputText.innerHTML = 'Tie!';
     }
 
