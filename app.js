@@ -103,7 +103,6 @@ function getCondition() {
 }
 
 function reset() {
-    console.log("hello");
     let buttons = Array.from(document.getElementsByClassName('square'));
     buttons.forEach(function(button) {
         switchTo(button, 'n');
